@@ -5,8 +5,8 @@
 [ext_resource path="res://Scene/Character/Character.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Sprite/Accessory-sheet.png" type="Texture" id=4]
 [ext_resource path="res://Scene/Levels/Box.gd" type="Script" id=5]
-[ext_resource path="res://Son/breaking_case.wav" type="AudioStream" id=6]
-[ext_resource path="res://Son/Wind-Mark_DiAngelo-1940285615.wav" type="AudioStream" id=7]
+[ext_resource path="res://Son/Wind.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Son/breaking_case.ogg" type="AudioStream" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -163,14 +163,13 @@ position = Vector2( 57, 395 )
 [node name="Musique" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 volume_db = -3.0
-autoplay = true
 
 [node name="Box" type="Node2D" parent="."]
 position = Vector2( 0, 3 )
 script = ExtResource( 5 )
 
 [node name="Breaking_case" type="AudioStreamPlayer" parent="Box"]
-stream = ExtResource( 6 )
+stream = ExtResource( 7 )
 
 [node name="Animated_sprite" type="AnimatedSprite" parent="Box"]
 position = Vector2( 148, 379 )
@@ -178,6 +177,6 @@ frames = SubResource( 11 )
 animation = "Breaking"
 
 [node name="Wind" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+stream = ExtResource( 6 )
 volume_db = -12.0
 autoplay = true

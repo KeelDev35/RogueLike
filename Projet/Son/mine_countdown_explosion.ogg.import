@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mine_countdown_explosion.ogg-5ceed263163c38338f64bfde38cd0ef9.oggstr"
+
+[deps]
+
+source_file="res://Son/mine_countdown_explosion.ogg"
+dest_files=[ "res://.import/mine_countdown_explosion.ogg-5ceed263163c38338f64bfde38cd0ef9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
