@@ -1,19 +1,21 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Sprite/Player-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://Scene/bullet_impact.gd" type="Script" id=2]
 [ext_resource path="res://Son/bullet_impact.ogg" type="AudioStream" id=3]
 
+[sub_resource type="StreamTexture" id=12]
+load_path = "res://.import/Player-Sheet.png-567de1c3cdf843ef1c043c9de1912d50.stex"
+
 [sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
+atlas = SubResource( 12 )
 region = Rect2( 96, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
+atlas = SubResource( 12 )
 region = Rect2( 144, 48, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 1 )
+atlas = SubResource( 12 )
 region = Rect2( 0, 96, 48, 48 )
 
 [sub_resource type="SpriteFrames" id=4]
