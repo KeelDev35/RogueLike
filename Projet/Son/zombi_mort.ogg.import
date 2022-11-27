@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/zombi_mort.ogg-51746e5a205b9bdfad4f266b0e409eb6.oggstr"
+
+[deps]
+
+source_file="res://Son/zombi_mort.ogg"
+dest_files=[ "res://.import/zombi_mort.ogg-51746e5a205b9bdfad4f266b0e409eb6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

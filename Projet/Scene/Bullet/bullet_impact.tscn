@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scene/Bullet/bullet_impact.gd" type="Script" id=1]
+[ext_resource path="res://Import/Graph/Actor/PNG/Accessory-sheet.png" type="Texture" id=2]
+[ext_resource path="res://Son/bullet_impact.ogg" type="AudioStream" id=3]
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 62, 128, 31, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 62, 160, 31, 32 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 62, 192, 31, 32 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), null ],
+"loop": false,
+"name": "Impact",
+"speed": 15.0
+} ]
+
+[node name="Bullet_impact" type="Node2D"]
+rotation = 1.5708
+script = ExtResource( 1 )
+
+[node name="Animated_sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+animation = "Impact"
+
+[node name="Bullet_impact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = 10.0
+
+[connection signal="finished" from="Bullet_impact" to="." method="_on_Bullet_impact_finished"]

@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Import/Graph/Actor/PNG/Accessory-sheet.png" type="Texture" id=1]
+[ext_resource path="res://Son/grenade_explosion.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Scene/Grenade/Grenade.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 3.0
+height = 2.0
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 96, 96, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": false,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"loop": false,
+"name": "Explosion",
+"speed": 10.0
+} ]
+
+[node name="Grenade" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource( 3 )
+
+[node name="TimerExplosion" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 6 )
+animation = "Idle"
+
+[node name="Sandbox" type="Node2D" parent="."]
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="Sandbox"]
+stream = ExtResource( 2 )
+volume_db = 10.0
