@@ -23,6 +23,7 @@ enum STATE {
 onready var Sprite_character = get_node("Sprite_character")
 onready var Fire = get_node("Fire")
 onready var Walk_sand = get_node("walk_sand")
+onready var Reload = get_node("Reload")
 
 export var bullet_speed = 1000
 
@@ -45,7 +46,19 @@ signal state_changed
 
 ### ACCESSORS ###
 
-func set_state (value:int) -> void :
+
+
+ func set_state (value:int) -> void :
+
+func _process(delta : float) -> void:
+	
+	move_and_slide(direction * speed)
+	look_at(get_global_mouse_position())
+	
+	if "fire_reload".is_subsequence_of(Sprite_character.get_animation()) :
+		if Sprite_character.get_frame() == 1 :
+				Reload.play()
+
 
 	if (value != state) :
 	
@@ -97,6 +110,7 @@ func _input(event:InputEvent) -> void:
 		set_is_walking(true)
 	else : 
 		set_is_walking(false)
+	
 
 	if (Input.is_action_just_pressed("fire") and canShoot == true ) :
 			
@@ -116,6 +130,7 @@ func _input(event:InputEvent) -> void:
 	
 	if (Input.is_action_just_pressed("select") and canGrenade == true) :
 		
+
 		set_state(STATE.GRENADE)
 	
 
@@ -133,6 +148,16 @@ func update_animation() -> void :
 		STATE.HURT : state_name = "Hurt"
 		STATE.DEAD : state_name = "Dead"
 		STATE.GRENADE : state_name = "Grenade"
+
+		var bullet_instance = bullet.instance()
+		bullet_instance.position = $bullet_point.get_global_position()
+		bullet_instance.rotation_degrees = rotation_degrees
+		bullet_instance.apply_impulse(Vector2(),Vector2(bullet_speed,0).rotated(rotation))
+		get_tree().get_root().add_child(bullet_instance)
+		Sprite_character.play("fire_reload")
+		Fire.play()				
+		canShoot = false
+
 		
 	Sprite_character.play(state_name)
 #	print(state_name)
@@ -141,7 +166,15 @@ func update_sound() -> void :
 	
 	pass
 
+
 ### SIGNAL RESPONSES ###
+
+				
+		
+		
+		
+
+
 
 func on_is_walking_changed () :
 	
