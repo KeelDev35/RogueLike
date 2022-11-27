@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/grenade_lancé.ogg-08e452682f0594edb137195884722dab.oggstr"
+
+[deps]
+
+source_file="res://Son/grenade_lancé.ogg"
+dest_files=[ "res://.import/grenade_lancé.ogg-08e452682f0594edb137195884722dab.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

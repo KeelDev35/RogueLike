@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/zombi_possédé_mort.ogg-938a75ba00ebbc847426be301002a20a.oggstr"
+
+[deps]
+
+source_file="res://Son/zombi_possédé_mort.ogg"
+dest_files=[ "res://.import/zombi_possédé_mort.ogg-938a75ba00ebbc847426be301002a20a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
