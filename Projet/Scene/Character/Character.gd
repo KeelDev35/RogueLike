@@ -31,7 +31,7 @@ onready var CooldownGrenade = get_node("Cooldown_Grenade")
 
 
 export var bullet_speed = 1000
-export var grenade_speed = 200
+export var grenade_speed = 250
 
 var state : int = STATE.IDLE setget set_state, get_state
 
@@ -82,13 +82,13 @@ func _ready() -> void: # Called when the node enters the scene tree for the firs
 	__ = Sprite_character.connect ("animation_finished", self, "_on_Sprite_animation_finished")
 	__ = CooldownGrenade.connect("timeout",self, "_on_timeout")
 
-func _process(delta : float) -> void: # main process function
+func _process(_delta : float) -> void: # main process function
 	look_at(get_global_mouse_position())
-	move_and_slide(direction * speed)
-	print(canGrenade,CooldownGrenade.time_left)
+	move_and_slide(direction * speed) 
+
 	
 	
-func _input(event:InputEvent) -> void:
+func _input(_event:InputEvent) -> void:
 	
 	direction.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
 	direction.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
@@ -169,7 +169,6 @@ func on_is_walking_changed () :
 	
 func _on_Sprite_animation_finished():
 	
-	var state_name = ""
 	
 	match (state) :
 		

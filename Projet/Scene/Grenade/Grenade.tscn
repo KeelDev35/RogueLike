@@ -12,19 +12,19 @@ height = 2.0
 atlas = ExtResource( 1 )
 region = Rect2( 96, 64, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 64, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
 region = Rect2( 32, 64, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 64, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
 region = Rect2( 96, 96, 32, 32 )
 
@@ -35,18 +35,19 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), null ],
 "loop": false,
 "name": "Explosion",
 "speed": 10.0
 } ]
 
 [node name="Grenade" type="RigidBody2D"]
+mass = 2.0
 gravity_scale = 0.0
 script = ExtResource( 3 )
 
 [node name="TimerExplosion" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 1.5
 one_shot = true
 
 [node name="Collider" type="CollisionShape2D" parent="."]

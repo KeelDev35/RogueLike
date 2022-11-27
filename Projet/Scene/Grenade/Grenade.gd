@@ -30,13 +30,19 @@ func get_state() -> int:
    ### BUILT_IN ###
 
 func _ready():
-	
+	set_state(STATE.IDLE)
 	Timer_Explosion.start()
 	var __ = connect("state_changed",self,"_on_state_changed")
 	__ = Timer_Explosion.connect("timeout",self, "_on_TimerExplosion_timeout")
 	__ = Sandbox_Explosion.connect("finished",self,"_on_sandbox_finished")
 	
 
+func _process(delta):
+	
+	if state == STATE.IDLE :
+		self.apply_central_impulse(-linear_velocity *0.05)
+		
+	
 	
 	
 	
@@ -47,7 +53,10 @@ func _ready():
 func update_animation () -> void:
 	match (state):
 		STATE.IDLE : Animated_Sprite.play("Idle")
-		STATE.EXPLOSION : Animated_Sprite.play("Explosion")
+		STATE.EXPLOSION : 
+			self.linear_velocity = Vector2.ZERO
+			self.angular_velocity = 0
+			Animated_Sprite.play("Explosion")
 	pass
 func update_sound() -> void:
 	match (state):
