@@ -11,5 +11,5 @@ dest_files=[ "res://.import/zombi_mort.ogg-51746e5a205b9bdfad4f266b0e409eb6.oggs
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

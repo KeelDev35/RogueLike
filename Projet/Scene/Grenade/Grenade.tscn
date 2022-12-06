@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Import/Graph/Actor/PNG/Accessory-sheet.png" type="Texture" id=1]
 [ext_resource path="res://Son/grenade_explosion.ogg" type="AudioStream" id=2]
@@ -41,7 +41,14 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="CircleShape2D" id=12]
+radius = 6.08276
+
+[sub_resource type="CircleShape2D" id=13]
+radius = 34.0
+
 [node name="Grenade" type="RigidBody2D"]
+collision_layer = 4
 mass = 2.0
 gravity_scale = 0.0
 script = ExtResource( 3 )
@@ -62,3 +69,17 @@ animation = "Idle"
 [node name="Explosion" type="AudioStreamPlayer2D" parent="Sandbox"]
 stream = ExtResource( 2 )
 volume_db = 10.0
+
+[node name="DetectionBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionBox"]
+shape = SubResource( 12 )
+
+[node name="ExplosionHitBox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionHitBox"]
+shape = SubResource( 13 )

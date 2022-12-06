@@ -8,6 +8,28 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Astar_Spawn",
+"language": "GDScript",
+"path": "res://Scene/Manager/Spawn/tile_spawn.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Scene/Character/Character.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Zombie",
+"language": "GDScript",
+"path": "res://Scene/Zombie/Zombie.gd"
+} ]
+_global_script_class_icons={
+"Astar_Spawn": "",
+"Character": "",
+"Zombie": ""
+}
+
 [application]
 
 config/name="Projet"
