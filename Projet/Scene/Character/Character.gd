@@ -35,6 +35,7 @@ onready	var	Sandbox_Pin_Grande = get_node("SoundBox/Pin_Grenade")
 onready var Cooldown_Grenade = get_node("Cooldowns/CooldownGrenade")
 onready var Cooldown_Melee = get_node("Cooldowns/CooldownMelee")
 onready var Cooldown_Shoot = get_node("Cooldowns/CooldownShoot")
+onready var Cooldown_CanGrab = get_node("Cooldowns/CooldownCanGrab")
 
 onready var Melee_Hitbox = get_node("AttackMeleeHitbox")
 
@@ -56,7 +57,10 @@ var meleeDamage : int = 1
 var canShoot = true
 var canMelee = true
 var canGrenade = true
+var canGrab = true
+var isGrab = false 
 
+var body_target : Node2D = null
 
 ### SIGNALS ###
 
@@ -95,10 +99,16 @@ func _ready() -> void: # Called when the node enters the scene tree for the firs
 	__ = Cooldown_Grenade.connect("timeout",self, "_on_timeout_cooldown_grenade")
 	__ = Cooldown_Melee.connect("timeout", self, "_on_timeout_cooldown_melee")
 	__ = Cooldown_Shoot.connect("timeout", self, "_on_timeout_cooldown_shoot")
+	__ = Cooldown_CanGrab.connect("timeout", self, "_on_timeout_cooldown_canGrab")
 
 func _process(_delta : float) -> void: # main process function
-	look_at(get_global_mouse_position())
 	var _dir_move = move_and_slide(direction * speed) 
+	if !isGrab:
+		look_at(get_global_mouse_position())
+
+
+	
+	
 func _input(_event:InputEvent) -> void:
 	
 	direction.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
@@ -112,26 +122,35 @@ func _input(_event:InputEvent) -> void:
 		set_is_walking(false)
 	
 	if state == STATE.IDLE :
-		if (Input.is_action_just_pressed("fire") and canShoot == true ) :
-			set_state(STATE.FIRE)
-			Cooldown_Shoot.start()
-			canShoot = false
-			
-			var bullet_instance = bullet.instance()
-			bullet_instance.position = Bullet_Point.get_global_position()
-			bullet_instance.rotation_degrees = rotation_degrees
-			bullet_instance.apply_impulse(Vector2(),Vector2(bullet_speed,0).rotated(rotation))
-			get_tree().get_root().add_child(bullet_instance)
-			
+		
 		if (Input.is_action_just_pressed ("melee_attack") and canMelee == true) :
 			canMelee = false
 			Cooldown_Melee.start()
 			set_state(STATE.MELEE)
-	
-		if (Input.is_action_just_pressed("select") and canGrenade == true) :
-			canGrenade = false
-			Cooldown_Grenade.start()
-			set_state(STATE.GRENADE)
+			if isGrab:
+				body_target.state_machine.set_state("Hurt")
+#				can_grab(true)
+				speed = 100
+
+		
+		if !isGrab:
+			if (Input.is_action_just_pressed("fire") and canShoot == true ) :
+				set_state(STATE.FIRE)
+				Cooldown_Shoot.start()
+				canShoot = false
+				
+				var bullet_instance = bullet.instance()
+				bullet_instance.position = Bullet_Point.get_global_position()
+				bullet_instance.rotation_degrees = rotation_degrees
+				bullet_instance.apply_impulse(Vector2(),Vector2(bullet_speed,0).rotated(rotation))
+				get_tree().get_root().add_child(bullet_instance)
+			
+			if (Input.is_action_just_pressed("select") and canGrenade == true) :
+				canGrenade = false
+				Cooldown_Grenade.start()
+				set_state(STATE.GRENADE)
+
+#
 
 		
 	
@@ -172,8 +191,16 @@ func _attack_effect():
 		
 		if body.has_method("hurt"):
 			body.hurt(meleeDamage)
+
+func is_grab(body : Node2D) :
+		body_target = body
+		look_at(body.position)
+		isGrab = true
+		canGrab = false
+		speed = 0
+		body = null
 		
-		
+
 ### SIGNAL RESPONSES ###
 
 func _on_is_walking_changed () :
@@ -196,7 +223,12 @@ func _on_Sprite_animation_finished():
 			get_tree().get_root().add_child(grenade_instance)
 			set_state(STATE.IDLE)
 		
-		STATE.MELEE :set_state(STATE.IDLE)
+		STATE.MELEE : 
+			if isGrab : 
+				isGrab = false
+				speed = 100
+				Cooldown_CanGrab.start()
+			set_state(STATE.IDLE)
 			
 func _on_melee_frame_changed():
 	if "Melee".is_subsequence_of(Animated_Sprite.get_animation()):
@@ -214,3 +246,5 @@ func _on_timeout_cooldown_melee():
 	canMelee =true
 func _on_timeout_cooldown_shoot():
 	canShoot = true
+func _on_timeout_cooldown_canGrab():
+	canGrab = true
