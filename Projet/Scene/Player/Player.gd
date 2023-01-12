@@ -1,12 +1,12 @@
 
 #############
-# CHARACTER #
+### PLAYER ##
 #############
 
 ### EXPANSION ###
 
 extends KinematicBody2D
-class_name Character
+class_name Player
 
 
 ### ENUMERATION ###
@@ -51,7 +51,9 @@ var walk :bool setget	set_is_walking, get_is_walking
 var bullet = preload("res://Scene/Bullet/bullet.tscn")
 var grenade = preload("res://Scene/Grenade/Grenade.tscn")
 
+var damage_taken : = 0
 var speed = 100
+var velocity = Vector2.ZERO
 var direction = Vector2.ZERO
 var meleeDamage : int = 1
 var canShoot = true
@@ -102,7 +104,7 @@ func _ready() -> void: # Called when the node enters the scene tree for the firs
 	__ = Cooldown_CanGrab.connect("timeout", self, "_on_timeout_cooldown_canGrab")
 
 func _process(_delta : float) -> void: # main process function
-	var _dir_move = move_and_slide(direction * speed) 
+	velocity = move_and_slide(direction * speed) 
 	if !isGrab:
 		look_at(get_global_mouse_position())
 
@@ -127,10 +129,7 @@ func _input(_event:InputEvent) -> void:
 			canMelee = false
 			Cooldown_Melee.start()
 			set_state(STATE.MELEE)
-			if isGrab:
-				body_target.state_machine.set_state("Hurt")
-#				can_grab(true)
-				speed = 100
+
 
 		
 		if !isGrab:
@@ -189,9 +188,12 @@ func _attack_effect():
 		if body == self :
 			continue
 		
-		if body.has_method("hurt"):
-			body.hurt(meleeDamage)
-
+		if body.has_method("hit"):
+			body.hit(meleeDamage)
+func hit(damage : int):
+	damage_taken = damage
+	set_state(STATE.HURT)
+	
 func is_grab(body : Node2D) :
 		body_target = body
 		look_at(body.position)
@@ -224,6 +226,13 @@ func _on_Sprite_animation_finished():
 			set_state(STATE.IDLE)
 		
 		STATE.MELEE : 
+			if isGrab : 
+				isGrab = false
+				speed = 100
+				Cooldown_CanGrab.start()
+			set_state(STATE.IDLE)
+			
+		STATE.HURT :
 			if isGrab : 
 				isGrab = false
 				speed = 100

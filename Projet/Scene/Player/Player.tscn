@@ -1,92 +1,92 @@
 [gd_scene load_steps=31 format=2]
 
-[ext_resource path="res://Scene/Character/Character.gd" type="Script" id=1]
-[ext_resource path="res://Import/Graph/Actor/PNG/Player-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Scene/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Son/bayonette.ogg" type="AudioStream" id=2]
 [ext_resource path="res://Son/fire_reload.ogg" type="AudioStream" id=3]
-[ext_resource path="res://Son/walk_sand.ogg" type="AudioStream" id=4]
-[ext_resource path="res://Son/reload.ogg" type="AudioStream" id=5]
-[ext_resource path="res://Son/bayonette.ogg" type="AudioStream" id=6]
-[ext_resource path="res://Son/grenade_lancé.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Son/grenade_lancé.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Son/walk_sand.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Son/reload.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Import/Graph/Actor/PNG/Player-Sheet.png" type="Texture" id=7]
 
 [sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 48, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 96, 96, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 288, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 48, 288, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 96, 288, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 144, 288, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 48, 48 )
-
 [sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 144, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=48]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 192, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=49]
-atlas = ExtResource( 2 )
-region = Rect2( 48, 192, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=50]
-atlas = ExtResource( 2 )
-region = Rect2( 96, 192, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=51]
-atlas = ExtResource( 2 )
-region = Rect2( 144, 192, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=42]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 48, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=43]
-atlas = ExtResource( 2 )
+[sub_resource type="AtlasTexture" id=40]
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 240, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=45]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 48, 240, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=46]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 96, 240, 48, 48 )
 
 [sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 2 )
+atlas = ExtResource( 7 )
 region = Rect2( 144, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 7 )
+region = Rect2( 48, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 7 )
+region = Rect2( 96, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 7 )
+region = Rect2( 144, 192, 48, 48 )
 
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
@@ -105,25 +105,25 @@ animations = [ {
 "name": "Grenade",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 40 ), SubResource( 41 ) ],
+"frames": [ SubResource( 41 ), SubResource( 40 ) ],
 "loop": false,
 "name": "Hurt",
-"speed": 5.0
+"speed": 8.0
 }, {
-"frames": [ SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ) ],
+"frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
 "loop": false,
-"name": "Dead",
-"speed": 5.0
+"name": "Melee",
+"speed": 15.0
 }, {
 "frames": [ SubResource( 42 ), SubResource( 43 ) ],
 "loop": false,
 "name": "Fire",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
+"frames": [ SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ) ],
 "loop": false,
-"name": "Melee",
-"speed": 15.0
+"name": "Dead",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=31]
@@ -134,7 +134,7 @@ height = 8.0
 radius = 13.0
 height = 26.0
 
-[node name="Character" type="KinematicBody2D" groups=["Character"]]
+[node name="Player" type="KinematicBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource( 1 )
@@ -168,7 +168,6 @@ drag_margin_right = 0.1
 drag_margin_bottom = 0.1
 
 [node name="AttackMeleeHitbox" type="Area2D" parent="."]
-visible = false
 position = Vector2( 1, -1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackMeleeHitbox"]
@@ -188,26 +187,26 @@ one_shot = true
 one_shot = true
 
 [node name="CooldownCanGrab" type="Timer" parent="Cooldowns"]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="SoundBox" type="Node2D" parent="."]
 
 [node name="walk_sand" type="AudioStreamPlayer" parent="SoundBox"]
-stream = ExtResource( 4 )
+stream = ExtResource( 5 )
 volume_db = 10.0
 
 [node name="Fire" type="AudioStreamPlayer" parent="SoundBox"]
 stream = ExtResource( 3 )
 
 [node name="Reload" type="AudioStreamPlayer2D" parent="SoundBox"]
-stream = ExtResource( 5 )
-
-[node name="Melee" type="AudioStreamPlayer2D" parent="SoundBox"]
 stream = ExtResource( 6 )
 
+[node name="Melee" type="AudioStreamPlayer2D" parent="SoundBox"]
+stream = ExtResource( 2 )
+
 [node name="Pin_Grenade" type="AudioStreamPlayer2D" parent="SoundBox"]
-stream = ExtResource( 7 )
+stream = ExtResource( 4 )
 
 [node name="InstancePoints" type="Node2D" parent="."]
 

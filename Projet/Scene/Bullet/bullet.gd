@@ -25,12 +25,12 @@ func _ready():
 ### SIGNAL RESPONSES ###
 
 func _on_bullet_body_entered(body):
-	if !body.is_in_group("Character"):
+	if !body.is_in_group("Player"):
 		var impact_instance = impact.instance()
 		impact_instance.position = get_global_position()
 		get_tree().get_root().add_child(impact_instance)
 		
-		if body.has_method("hurt"):
-			body.hurt(damage)
+		if body.has_method("hit"):
+			body.hit(damage)
 		
 		queue_free()
