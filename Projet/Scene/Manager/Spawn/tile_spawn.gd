@@ -45,7 +45,8 @@ func _random_spawn ():
 		var rand_spawner_instance = used_cells[randi() % used_cells.size()]
 		spawner_instance.position = Vector2 ((rand_spawner_instance.x *32) +16  , (rand_spawner_instance.y *32) +16)
 		
-		add_child(spawner_instance)
+		get_parent().add_child(spawner_instance)
+		
 func _on_timeout():
 	timer.wait_time = rand_range(min_wait_time,max_wait_time) 
 	pass

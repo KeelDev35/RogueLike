@@ -1,26 +1,60 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://States/DieState.gd" type="Script" id=1]
 [ext_resource path="res://States/MoveState.gd" type="Script" id=2]
 [ext_resource path="res://States/SpawnState.gd" type="Script" id=3]
 [ext_resource path="res://States/HurtState.gd" type="Script" id=4]
 [ext_resource path="res://StateMachine/StateMachine.gd" type="Script" id=5]
-[ext_resource path="res://States/IdleState.gd" type="Script" id=6]
 [ext_resource path="res://States/AttackState.gd" type="Script" id=7]
 [ext_resource path="res://Heritage/H_Character.gd" type="Script" id=8]
+[ext_resource path="res://Shaders/Hurt.gdshader" type="Shader" id=9]
+[ext_resource path="res://Import/Graph/HUB/Zombie/Front_Health_bars.png" type="Texture" id=10]
+[ext_resource path="res://Import/Graph/HUB/Zombie/Back_Health_bars.png" type="Texture" id=11]
 
-[node name="H_Character" type="Node2D"]
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = ExtResource( 9 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/opacity = 0.0
+
+[node name="H_Character" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource( 8 )
 speed = 100
 max_HP = 3
 current_HP = 3
 
+[node name="HUD" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Health_Bar" type="Control" parent="HUD"]
+margin_left = -17.0
+margin_top = -8.0
+margin_right = 23.0001
+margin_bottom = 32.0
+rect_rotation = 90.0
+
+[node name="TextureProgress" type="TextureProgress" parent="HUD/Health_Bar"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+max_value = 1.0
+texture_under = ExtResource( 11 )
+texture_progress = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="HUD/Health_Bar"]
+margin_right = 40.0
+margin_bottom = 14.0
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 2 )
 rotation = 1.5708
 
-[node name="Hitboxs" type="Node2D" parent="."]
+[node name="SelfHitBox" type="CollisionShape2D" parent="."]
 
-[node name="SelfHitBox" type="CollisionShape2D" parent="Hitboxs"]
+[node name="Hitboxs" type="Node2D" parent="."]
 
 [node name="AttackHitbox" type="Area2D" parent="Hitboxs"]
 
@@ -36,9 +70,6 @@ script = ExtResource( 5 )
 [node name="Spawn" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
 
-[node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource( 6 )
-
 [node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource( 2 )
 
@@ -51,12 +82,8 @@ script = ExtResource( 4 )
 [node name="Die" type="Node" parent="StateMachine"]
 script = ExtResource( 1 )
 
-[node name="HUD" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-
 [node name="Areas" type="Node2D" parent="."]
 
-[node name="ChaseArea" type="Area2D" parent="Areas"]
-
 [node name="AttackArea" type="Area2D" parent="Areas"]
+
+[node name="Tween" type="Tween" parent="."]

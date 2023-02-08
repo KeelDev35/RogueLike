@@ -95,11 +95,11 @@ func _on_TimerExplosion_timeout():
 	_attack_effect()
 func _on_sandbox_finished():
 	queue_free()
-func _on_body_entered(body : Node2D):
-		if body.has_method("hit") and state == STATE.IDLE:
-			Timer_Explosion.stop()
-			Timer_Explosion.wait_time = 0.05
-			Timer_Explosion.start()
+func _on_body_entered(body):
+	if body.has_method("hit") and state == STATE.IDLE:
+		Timer_Explosion.stop()
+		Timer_Explosion.wait_time = 0.05
+		Timer_Explosion.start()
 	
 	
 	

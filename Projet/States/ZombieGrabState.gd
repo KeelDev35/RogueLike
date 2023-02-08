@@ -12,5 +12,5 @@ func update (_delta : float):
 
 func exit_state():
 	if owner.has_method("_grab_exit_state"):
-		var __ = owner._grab_exit_state
+		var __ = owner._grab_exit_state()
 	else : pass

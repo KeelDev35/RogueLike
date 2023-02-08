@@ -194,14 +194,12 @@ func hit(damage : int):
 	damage_taken = damage
 	set_state(STATE.HURT)
 	
-func is_grab(body : Node2D) :
-		body_target = body
-		look_at(body.position)
+func is_grab() :
 		isGrab = true
 		canGrab = false
 		speed = 0
-		body = null
-		
+
+
 
 ### SIGNAL RESPONSES ###
 
@@ -215,6 +213,7 @@ func _on_Sprite_animation_finished():
 	
 	match (state) :
 		
+		STATE.IDLE : if !Cooldown_CanGrab.start() : Cooldown_CanGrab.start()
 		STATE.FIRE : set_state(STATE.RELOAD)
 		STATE.RELOAD : set_state(STATE.IDLE)
 		STATE.GRENADE : 
@@ -227,6 +226,7 @@ func _on_Sprite_animation_finished():
 		
 		STATE.MELEE : 
 			if isGrab : 
+				body_target = null
 				isGrab = false
 				speed = 100
 				Cooldown_CanGrab.start()
@@ -235,8 +235,11 @@ func _on_Sprite_animation_finished():
 		STATE.HURT :
 			if isGrab : 
 				isGrab = false
+				body_target = null
 				speed = 100
 				Cooldown_CanGrab.start()
+				
+				
 			set_state(STATE.IDLE)
 			
 func _on_melee_frame_changed():

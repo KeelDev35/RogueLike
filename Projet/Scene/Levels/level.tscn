@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Son/OST.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scene/TileMap_Type/Tilemap_Type.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scene/Player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scene/Zombie/Zombie.tscn" type="PackedScene" id=4]
 [ext_resource path="res://SpawnManager.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Son/Wind.ogg" type="AudioStream" id=6]
 
@@ -36,10 +35,10 @@ volume_db = -12.0
 autoplay = true
 
 [node name="SpawnManager" parent="." instance=ExtResource( 5 )]
-number = 1
-min_wait_time = 1.0
-max_wait_time = 2.0
-spawner = ExtResource( 4 )
+wait_start = 2.0
+number = 100
+min_wait_time = 0.0
+max_wait_time = 1.0
 
 [node name="TileMap" parent="SpawnManager" index="0"]
 visible = false

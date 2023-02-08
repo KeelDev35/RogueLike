@@ -1,33 +1,36 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
-[ext_resource path="res://Scene/Zombie/AnimatedSpriteZombie.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://States/DieState.gd" type="Script" id=2]
-[ext_resource path="res://Scene/Zombie/Zombie.gd" type="Script" id=3]
-[ext_resource path="res://Son/zombi_mort.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Scene/Zombie/SelfhitBoxZombie.tres" type="Shape2D" id=1]
+[ext_resource path="res://Scene/Zombie/AnimatedSpriteZombie.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Import/Graph/HUB/Zombie/Back_Health_bars.png" type="Texture" id=3]
+[ext_resource path="res://States/ZombieGrabState.gd" type="Script" id=4]
 [ext_resource path="res://Import/Graph/HUB/Zombie/Front_Health_bars.png" type="Texture" id=5]
-[ext_resource path="res://Import/Graph/HUB/Zombie/Back_Health_bars.png" type="Texture" id=6]
-[ext_resource path="res://States/SpawnState.gd" type="Script" id=7]
-[ext_resource path="res://StateMachine/StateMachine.gd" type="Script" id=8]
-[ext_resource path="res://States/MoveState.gd" type="Script" id=9]
+[ext_resource path="res://Scene/Zombie/Zombie.gd" type="Script" id=6]
+[ext_resource path="res://States/DieState.gd" type="Script" id=7]
+[ext_resource path="res://States/AttackState.gd" type="Script" id=8]
+[ext_resource path="res://States/SpawnState.gd" type="Script" id=9]
 [ext_resource path="res://States/HurtState.gd" type="Script" id=10]
-[ext_resource path="res://States/IdleState.gd" type="Script" id=11]
-[ext_resource path="res://States/AttackState.gd" type="Script" id=12]
-[ext_resource path="res://States/ZombieGrabState.gd" type="Script" id=13]
+[ext_resource path="res://States/MoveState.gd" type="Script" id=11]
+[ext_resource path="res://StateMachine/StateMachine.gd" type="Script" id=12]
+[ext_resource path="res://Shaders/Hurt.gdshader" type="Shader" id=13]
+[ext_resource path="res://Son/zombi_mort.ogg" type="AudioStream" id=14]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 6.0
-height = 10.0
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 160.0
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = ExtResource( 13 )
+shader_param/flash_color = Color( 1, 1, 1, 1 )
+shader_param/opacity = 0.0
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 25.0
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 5, 8 )
+
 [node name="Zombie" type="KinematicBody2D"]
 collision_layer = 2
 collision_mask = 3
-script = ExtResource( 3 )
+script = ExtResource( 6 )
 speed = 60
 max_HP = 3
 current_HP = 3
@@ -49,7 +52,7 @@ visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 max_value = 1.0
-texture_under = ExtResource( 6 )
+texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 5 )
 
 [node name="Label" type="Label" parent="HUD/Health_Bar"]
@@ -58,12 +61,13 @@ margin_bottom = 14.0
 
 [node name="SelfHitBox" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 0 )
-shape = SubResource( 1 )
+shape = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 5 )
 rotation = 1.5708
-frames = ExtResource( 1 )
-animation = "Move"
+frames = ExtResource( 2 )
+animation = "Spawn"
 
 [node name="Hitboxs" type="Node2D" parent="."]
 
@@ -74,19 +78,20 @@ animation = "Move"
 [node name="SoundBox" type="Node2D" parent="."]
 
 [node name="Hurt" type="AudioStreamPlayer2D" parent="SoundBox"]
-stream = ExtResource( 4 )
+stream = ExtResource( 14 )
 
 [node name="Areas" type="Node2D" parent="."]
-
-[node name="ChaseArea" type="Area2D" parent="Areas"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/ChaseArea"]
-shape = SubResource( 2 )
 
 [node name="AttackArea" type="Area2D" parent="Areas"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AttackArea"]
 shape = SubResource( 3 )
+
+[node name="GrabArea" type="Area2D" parent="Areas"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/GrabArea"]
+position = Vector2( 11, 0 )
+shape = SubResource( 4 )
 
 [node name="Cooldowns" type="Node2D" parent="."]
 
@@ -97,25 +102,24 @@ one_shot = true
 [node name="CooldownAttack" type="Timer" parent="Cooldowns"]
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource( 8 )
+script = ExtResource( 12 )
 
 [node name="Spawn" type="Node" parent="StateMachine"]
-script = ExtResource( 7 )
-
-[node name="Idle" type="Node" parent="StateMachine"]
-script = ExtResource( 11 )
-
-[node name="Move" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
 
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource( 11 )
+
 [node name="Attack" type="Node" parent="StateMachine"]
-script = ExtResource( 12 )
+script = ExtResource( 8 )
 
 [node name="Hurt" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
 
 [node name="Die" type="Node" parent="StateMachine"]
-script = ExtResource( 2 )
+script = ExtResource( 7 )
 
 [node name="Grab" type="Node" parent="StateMachine"]
-script = ExtResource( 13 )
+script = ExtResource( 4 )
+
+[node name="Tween" type="Tween" parent="."]
