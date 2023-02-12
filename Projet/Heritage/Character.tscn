@@ -54,12 +54,6 @@ rotation = 1.5708
 
 [node name="SelfHitBox" type="CollisionShape2D" parent="."]
 
-[node name="Hitboxs" type="Node2D" parent="."]
-
-[node name="AttackHitbox" type="Area2D" parent="Hitboxs"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitboxs/AttackHitbox"]
-
 [node name="SoundBox" type="Node2D" parent="."]
 
 [node name="Cooldowns" type="Node2D" parent="."]

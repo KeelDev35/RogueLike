@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Astar_Spawn",
 "language": "GDScript",
-"path": "res://Scene/Manager/Spawn/tile_spawn.gd"
+"path": "res://Manager/Spawn/Logics/tile_spawn.gd"
 }, {
 "base": "State",
 "class": "AttackState",
@@ -24,10 +24,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://States/DieState.gd"
 }, {
+"base": "State",
+"class": "DrawState",
+"language": "GDScript",
+"path": "res://States/DrawState.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "H_Character",
 "language": "GDScript",
 "path": "res://Heritage/H_Character.gd"
+}, {
+"base": "H_Character",
+"class": "Hound",
+"language": "GDScript",
+"path": "res://Scene/Hound/Hound.gd"
 }, {
 "base": "State",
 "class": "HurtState",
@@ -49,20 +59,35 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scene/Player/Player.gd"
 }, {
+"base": "H_Character",
+"class": "Sergent",
+"language": "GDScript",
+"path": "res://Scene/Sergent/Sergent.gd"
+}, {
 "base": "State",
 "class": "SpawnState",
 "language": "GDScript",
 "path": "res://States/SpawnState.gd"
+}, {
+"base": "H_Character",
+"class": "Spirit",
+"language": "GDScript",
+"path": "res://Scene/Spirit/Spirit.gd"
 }, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
 "path": "res://StateMachine/State.gd"
 }, {
-"base": "Node",
+"base": "State",
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://StateMachine/StateMachine.gd"
+}, {
+"base": "Node2D",
+"class": "Wave",
+"language": "GDScript",
+"path": "res://Manager/Spawn/Logics/Wave.gd"
 }, {
 "base": "H_Character",
 "class": "Zombie",
@@ -73,14 +98,19 @@ _global_script_class_icons={
 "Astar_Spawn": "",
 "AttackState": "",
 "DieState": "",
+"DrawState": "",
 "H_Character": "",
+"Hound": "",
 "HurtState": "",
 "IdleState": "",
 "MoveState": "",
 "Player": "",
+"Sergent": "",
 "SpawnState": "",
+"Spirit": "",
 "State": "",
 "StateMachine": "",
+"Wave": "",
 "Zombie": ""
 }
 
@@ -95,6 +125,7 @@ config/icon="res://icon.png"
 window/size/width=768
 window/size/height=448
 mouse_cursor/custom_image="res://Import/Graph/HUB/Sight/RifleSight.png"
+mouse_cursor/custom_image_hotspot=Vector2( 24, 24 )
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
 

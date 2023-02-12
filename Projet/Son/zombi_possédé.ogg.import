@@ -11,5 +11,5 @@ dest_files=[ "res://.import/zombi_possédé.ogg-bb7369e278097566e5a89d8fccd50a79
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

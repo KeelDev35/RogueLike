@@ -27,23 +27,19 @@ var canGrab : bool = false
 
 func _ready():
 	var __ = $AnimatedSprite.connect("animation_finished",self, "_on_AnimatedSprite_animation_finished")
-#	__ = connect("HP_changed", self, "_on_HP_changed")
 	__ = cooldown_grab.connect("timeout", self, "_on_timeout_cooldown_grab")
 	__ = connect("target_in_attack_area", self, "_on_target_in_attack_area")
-	
-	target = get_node("../Player")
+	target = get_node("/root/Debug/Player")
 
 
 ### LOGICS ###		
 
-func _checking_life():
-	if current_HP >= 1 : state_machine.set_state("Move")	
-	elif current_HP <= 0 : state_machine.set_state("Die")
-	
+
+
 func _update_sound ():
 	match (state_machine.get_state_name()):
 		"Hurt" : sandbox_hurt.play()
-		"Die" : sandbox_hurt.play()
+
 
 func _try_to_grab():
 	var bodies_array = grab_area.get_overlapping_bodies()
@@ -106,19 +102,20 @@ func _die_enter_state():
 
 func _on_AnimatedSprite_animation_finished():
 
+
 	match(state_machine.get_state_name()):
 		"Spawn" : state_machine.set_state("Move")
-#
+		
 		"Move" : if target_in_attack_area : _update_target()
 		
 		"Hurt" : _checking_life()
-
+		
 		"Grab":
 			cooldown_grab.start()
 			canGrab = false
 			_try_to_grab()
 			if state_machine.get_state_name()!= "Attack":
-				state_machine.set_state("Move")
+				_checking_life()
 
 		"Attack" : 
 			if target.has_method("hit") && target.body_target == self :
@@ -126,7 +123,7 @@ func _on_AnimatedSprite_animation_finished():
 				var velocity = (target.global_position - self.global_position).normalized()
 				target.move_and_slide(velocity * 1000)
 				
-			state_machine.set_state("Move")
+				state_machine.set_state("Move")
 			
 		"Die" : queue_free()
 

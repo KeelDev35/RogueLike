@@ -142,6 +142,7 @@ func _input(_event:InputEvent) -> void:
 				bullet_instance.position = Bullet_Point.get_global_position()
 				bullet_instance.rotation_degrees = rotation_degrees
 				bullet_instance.apply_impulse(Vector2(),Vector2(bullet_speed,0).rotated(rotation))
+				bullet_instance.set_collision_mask_bit(1, true)
 				get_tree().get_root().add_child(bullet_instance)
 			
 			if (Input.is_action_just_pressed("select") and canGrenade == true) :
@@ -190,6 +191,8 @@ func _attack_effect():
 		
 		if body.has_method("hit"):
 			body.hit(meleeDamage)
+			
+
 func hit(damage : int):
 	damage_taken = damage
 	set_state(STATE.HURT)

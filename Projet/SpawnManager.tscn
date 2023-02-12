@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scene/Manager/Spawn/tile_spawn.gd" type="Script" id=2]
+[ext_resource path="res://Manager/Spawn/Logics/tile_spawn.gd" type="Script" id=2]
 [ext_resource path="res://Import/Graph/TileMap/PNG/Beach-Sheet.png" type="Texture" id=4]
 
 [sub_resource type="TileSet" id=1]
@@ -29,5 +29,4 @@ tile_set = SubResource( 1 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
+[node name="SoundBeginWave" type="AudioStreamPlayer" parent="."]

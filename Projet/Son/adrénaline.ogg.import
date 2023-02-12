@@ -11,5 +11,5 @@ dest_files=[ "res://.import/adrénaline.ogg-74499a1cf501739b6ebe063503cb5f09.ogg
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

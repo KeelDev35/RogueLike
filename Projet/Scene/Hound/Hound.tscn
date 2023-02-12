@@ -1,0 +1,230 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://Heritage/Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Import/Graph/Actor/PNG/Dog-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Son/zombi_hound_ fantome_mort.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Son/hound_attack.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Shaders/Hurt.gdshader" type="Shader" id=5]
+[ext_resource path="res://Scene/Hound/Hound.gd" type="Script" id=6]
+[ext_resource path="res://States/IdleState.gd" type="Script" id=7]
+
+[sub_resource type="ShaderMaterial" id=34]
+resource_local_to_scene = true
+shader = ExtResource( 5 )
+shader_param/flash_color = Color( 1, 1, 1, 0.8 )
+shader_param/opacity = 0.0
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 144, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 240, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 288, 96, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=38]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 2 )
+region = Rect2( 144, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 2 )
+region = Rect2( 240, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 2 )
+region = Rect2( 288, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 2 )
+region = Rect2( 336, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 144, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 144, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 2 )
+region = Rect2( 96, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 2 )
+region = Rect2( 144, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 2 )
+region = Rect2( 192, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 2 )
+region = Rect2( 240, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 2 )
+region = Rect2( 288, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 2 )
+region = Rect2( 336, 48, 48, 48 )
+
+[sub_resource type="SpriteFrames" id=33]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "Move",
+"speed": 18.0
+}, {
+"frames": [ SubResource( 38 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), null ],
+"loop": false,
+"name": "Die",
+"speed": 7.0
+}, {
+"frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 11 ), SubResource( 11 ), SubResource( 11 ), SubResource( 9 ), SubResource( 8 ) ],
+"loop": false,
+"name": "Attack",
+"speed": 8.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
+"loop": false,
+"name": "Hurt",
+"speed": 20.0
+}, {
+"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ],
+"loop": false,
+"name": "Spawn",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=35]
+radius = 7.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id=36]
+radius = 80.0
+
+[sub_resource type="CapsuleShape2D" id=37]
+radius = 8.0
+height = 22.0
+
+[node name="Hound" instance=ExtResource( 1 )]
+collision_layer = 2
+collision_mask = 25
+script = ExtResource( 6 )
+max_HP = 2
+current_HP = 2
+damage = 1
+
+[node name="AnimatedSprite" parent="." index="1"]
+material = SubResource( 34 )
+frames = SubResource( 33 )
+animation = "Spawn"
+
+[node name="SelfHitBox" parent="." index="2"]
+position = Vector2( -1, 0 )
+rotation = 1.5708
+shape = SubResource( 35 )
+
+[node name="Die" type="AudioStreamPlayer2D" parent="SoundBox" index="0"]
+stream = ExtResource( 3 )
+volume_db = 10.0
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="SoundBox" index="1"]
+stream = ExtResource( 4 )
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="SoundBox" index="2"]
+stream = ExtResource( 4 )
+pitch_scale = 1.4
+
+[node name="Idle" type="Node" parent="StateMachine" index="1"]
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AttackArea" index="0"]
+shape = SubResource( 36 )
+
+[node name="AttackHitBox" type="Area2D" parent="Areas" index="1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/AttackHitBox" index="0"]
+position = Vector2( -2, 0 )
+rotation = 1.5708
+shape = SubResource( 37 )
+disabled = true

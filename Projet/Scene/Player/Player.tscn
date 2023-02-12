@@ -24,46 +24,6 @@ region = Rect2( 96, 96, 48, 48 )
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 48, 48 )
 
-[sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 240, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=45]
-atlas = ExtResource( 7 )
-region = Rect2( 48, 240, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=46]
-atlas = ExtResource( 7 )
-region = Rect2( 96, 240, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 7 )
-region = Rect2( 144, 240, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=42]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 48, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=43]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=48]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 192, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=49]
-atlas = ExtResource( 7 )
-region = Rect2( 48, 192, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=50]
-atlas = ExtResource( 7 )
-region = Rect2( 96, 192, 48, 48 )
-
-[sub_resource type="AtlasTexture" id=51]
-atlas = ExtResource( 7 )
-region = Rect2( 144, 192, 48, 48 )
-
 [sub_resource type="AtlasTexture" id=36]
 atlas = ExtResource( 7 )
 region = Rect2( 0, 288, 48, 48 )
@@ -88,6 +48,46 @@ region = Rect2( 0, 144, 48, 48 )
 atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 48, 48 )
 
+[sub_resource type="AtlasTexture" id=44]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=45]
+atlas = ExtResource( 7 )
+region = Rect2( 48, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 7 )
+region = Rect2( 96, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=47]
+atlas = ExtResource( 7 )
+region = Rect2( 144, 240, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=49]
+atlas = ExtResource( 7 )
+region = Rect2( 48, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 7 )
+region = Rect2( 96, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=51]
+atlas = ExtResource( 7 )
+region = Rect2( 144, 192, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=42]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 48, 48, 48 )
+
+[sub_resource type="AtlasTexture" id=43]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 48, 48 )
+
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 33 ), SubResource( 32 ) ],
@@ -100,21 +100,6 @@ animations = [ {
 "name": "Idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
-"loop": false,
-"name": "Melee",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 42 ), SubResource( 43 ) ],
-"loop": false,
-"name": "Fire",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ) ],
-"loop": false,
-"name": "Dead",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
 "loop": false,
 "name": "Grenade",
@@ -124,6 +109,21 @@ animations = [ {
 "loop": false,
 "name": "Hurt",
 "speed": 8.0
+}, {
+"frames": [ SubResource( 44 ), SubResource( 45 ), SubResource( 46 ), SubResource( 47 ) ],
+"loop": false,
+"name": "Melee",
+"speed": 15.0
+}, {
+"frames": [ SubResource( 48 ), SubResource( 49 ), SubResource( 50 ), SubResource( 51 ) ],
+"loop": false,
+"name": "Dead",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 42 ), SubResource( 43 ) ],
+"loop": false,
+"name": "Fire",
+"speed": 5.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=31]
@@ -136,7 +136,7 @@ height = 26.0
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 collision_layer = 16
-collision_mask = 11
+collision_mask = 9
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -198,6 +198,7 @@ volume_db = 10.0
 
 [node name="Fire" type="AudioStreamPlayer" parent="SoundBox"]
 stream = ExtResource( 3 )
+volume_db = -5.0
 
 [node name="Reload" type="AudioStreamPlayer2D" parent="SoundBox"]
 stream = ExtResource( 6 )
@@ -214,4 +215,7 @@ stream = ExtResource( 4 )
 position = Vector2( 21, 8 )
 
 [node name="BulletPoint" type="Node2D" parent="InstancePoints"]
-position = Vector2( 17, 1 )
+position = Vector2( 17, 0 )
+
+[node name="HitPoint" type="Node2D" parent="InstancePoints"]
+position = Vector2( -5, 1 )

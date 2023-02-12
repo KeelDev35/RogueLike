@@ -11,5 +11,5 @@ dest_files=[ "res://.import/hound_attack.ogg-56d1a9db288a8ea84e5c4deaadd64e7a.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

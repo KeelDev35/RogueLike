@@ -13,7 +13,7 @@ class_name H_Character
 
 onready var state_machine = $StateMachine
 onready var animated_sprite = $AnimatedSprite
-onready var attack_hit_box = $Hitboxs/AttackHitbox
+#onready var attack_hit_box = $Hitboxs/AttackHitbox
 onready var attack_area = $Areas/AttackArea
 onready var tween = $Tween
 
@@ -46,15 +46,15 @@ func set_target_in_attack_area(value : bool):
 ### BUILT_IN ###
 
 func _ready():
-	state_machine.set_state("Spawn")
-
-	
 	var __ = attack_area.connect("body_entered", self,"_on_AttackArea_body_entered")
 	__ = attack_area.connect("body_exited", self, "_on_AttackArea_body_exited")
 	__ = state_machine.connect("state_changed", self, "_on_state_changed")
 	
-func _process(_delta):
-	if current_HP <= 0 : state_machine.set_state("Die")
+	state_machine.set_state("Spawn")
+
+
+#func _process(_delta):
+#	if current_HP <= 0 : state_machine.set_state("Die")
 
 ### LOGICS ###
 
@@ -81,6 +81,11 @@ func _update_target():
 	if target_in_attack_area:
 		emit_signal("target_in_attack_area")
 
+func _checking_life():
+	yield(get_tree().create_timer(0.1), "timeout")
+	if current_HP <= 0 : state_machine.set_state("Die")
+	elif current_HP >= 1 : state_machine.set_state("Move")	
+	
 ### LOGICS STATES ###
 
 func _hurt_enter_state():

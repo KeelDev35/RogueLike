@@ -13,5 +13,5 @@ func update(_delta : float):
 	
 func exit_state():
 	if owner.has_method("_attack_exit_state"):
-		var __ = owner._attack_exit_statre()
+		var __ = owner._attack_exit_state()
 	else : pass

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/mine_countdown_explosion.ogg-5ceed263163c38338f64bfd
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

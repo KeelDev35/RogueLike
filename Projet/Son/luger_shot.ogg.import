@@ -11,5 +11,5 @@ dest_files=[ "res://.import/luger_shot.ogg-8d56152fafcfebdf6351f3234f34426d.oggs
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
