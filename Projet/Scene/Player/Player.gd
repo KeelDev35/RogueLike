@@ -31,6 +31,8 @@ onready var Sandbox_Walk_sand = get_node("SoundBox/walk_sand")
 onready var Sandbox_Reload = get_node("SoundBox/Reload")
 onready var Sandbox_Melee = get_node("SoundBox/Melee")
 onready	var	Sandbox_Pin_Grande = get_node("SoundBox/Pin_Grenade")
+onready var HP_Bar = get_node("HUD/HealthBar/TextureProgress")
+onready var Grenade_count = get_node("HUD/GrenadeCount/Label")
 
 onready var Cooldown_Grenade = get_node("Cooldowns/CooldownGrenade")
 onready var Cooldown_Melee = get_node("Cooldowns/CooldownMelee")
@@ -61,6 +63,14 @@ var canMelee = true
 var canGrenade = true
 var canGrab = true
 var isGrab = false 
+
+#var MaxHP : int = 5
+#var CurrentHP : int = 5
+#
+#var MaxGrenade : int = 3
+#var CurrentGrenade : int = 3
+
+
 
 var body_target : Node2D = null
 
@@ -102,10 +112,21 @@ func _ready() -> void: # Called when the node enters the scene tree for the firs
 	__ = Cooldown_Melee.connect("timeout", self, "_on_timeout_cooldown_melee")
 	__ = Cooldown_Shoot.connect("timeout", self, "_on_timeout_cooldown_shoot")
 	__ = Cooldown_CanGrab.connect("timeout", self, "_on_timeout_cooldown_canGrab")
+	
+#	PlayerCarac.CurrentHP = PlayerCarac.MaxHP
+	HP_Bar.max_value = PlayerCarac.MaxHP
+	HP_Bar.value = PlayerCarac.CurrentHP
+	
+#	PlayerCarac.CurrentGrenade = PlayerCarac.MaxGrenade
+	Grenade_count.set_text(str(PlayerCarac.CurrentGrenade))
+	
+	
+
 
 func _process(_delta : float) -> void: # main process function
-	velocity = move_and_slide(direction * speed) 
-	if !isGrab:
+	if get_state() != STATE.DEAD :
+		velocity = move_and_slide(direction * speed) 
+	if !isGrab and get_state() != STATE.DEAD:
 		look_at(get_global_mouse_position())
 
 
@@ -146,15 +167,24 @@ func _input(_event:InputEvent) -> void:
 				get_tree().get_root().add_child(bullet_instance)
 			
 			if (Input.is_action_just_pressed("select") and canGrenade == true) :
-				canGrenade = false
-				Cooldown_Grenade.start()
-				set_state(STATE.GRENADE)
+				if PlayerCarac.CurrentGrenade > 0 :
+					set_state(STATE.GRENADE)
 
 #
 
-		
+func heal(value):
+	PlayerCarac.CurrentHP = PlayerCarac.CurrentHP + value
 	
+	if PlayerCarac.CurrentHP > PlayerCarac.MaxHP : PlayerCarac.CurrentHP = PlayerCarac.MaxHP
+	HP_Bar.value = PlayerCarac.CurrentHP
 
+func collect(id,value):
+	if id == 0 :
+		PlayerCarac.CurrentGrenade = PlayerCarac.CurrentGrenade + value
+		
+		if PlayerCarac.CurrentGrenade > PlayerCarac.MaxGrenade : PlayerCarac.CurrentGrenade = PlayerCarac.MaxGrenade
+		Grenade_count.set_text(str(PlayerCarac.CurrentGrenade))
+		
 ### LOGIC ###
 
 func _update_animation() -> void :
@@ -195,7 +225,12 @@ func _attack_effect():
 
 func hit(damage : int):
 	damage_taken = damage
-	set_state(STATE.HURT)
+	if PlayerCarac.CurrentHP > 0:
+		PlayerCarac.CurrentHP = PlayerCarac.CurrentHP - damage
+		HP_Bar.value = PlayerCarac.CurrentHP
+		set_state(STATE.HURT)
+	
+	
 	
 func is_grab() :
 		isGrab = true
@@ -225,6 +260,10 @@ func _on_Sprite_animation_finished():
 			grenade_instance.rotation_degrees = rotation_degrees
 			grenade_instance.apply_impulse(Vector2(),Vector2(grenade_speed,0).rotated(rotation))
 			get_tree().get_root().add_child(grenade_instance)
+			PlayerCarac.CurrentGrenade = PlayerCarac.CurrentGrenade -1
+			canGrenade = false
+			Grenade_count.set_text(str(PlayerCarac.CurrentGrenade))
+			Cooldown_Grenade.start()
 			set_state(STATE.IDLE)
 		
 		STATE.MELEE : 
@@ -242,13 +281,26 @@ func _on_Sprite_animation_finished():
 				speed = 100
 				Cooldown_CanGrab.start()
 				
-				
-			set_state(STATE.IDLE)
+			if PlayerCarac.CurrentHP > 0 :
+				set_state(STATE.IDLE)
+			else : set_state(STATE.DEAD)
+		
+		STATE.DEAD :
+			var __ = get_tree().change_scene("res://Scene/Levels/DeadScene.tscn")
 			
 func _on_melee_frame_changed():
 	if "Melee".is_subsequence_of(Animated_Sprite.get_animation()):
 		if Animated_Sprite.get_frame() == 2:
 			_attack_effect()
+			
+	if "Dead".is_subsequence_of(Animated_Sprite.get_animation()):
+		if Animated_Sprite.get_frame() ==1 :
+			$HitBox.disabled = true
+#			var enemies = get_tree().get_nodes_in_group("ENEMIES")
+#			for enemi in enemies:
+#				enemi.visible = false
+
+		
 		
 func _on_state_changed():
 	

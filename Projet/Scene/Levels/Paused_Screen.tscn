@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Import/Graph/Actor/PNG/MedicalKit.png" type="Texture" id=1]
+[ext_resource path="res://Paused_Screen.gd" type="Script" id=2]
+[ext_resource path="res://Font/Early GameBoy.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 3 )
+
+[node name="Paused_Screen" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="Wave_count" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -152.0
+margin_bottom = 20.0
+grow_horizontal = 0
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "waves 0 : 0"
+align = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.686275 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -51.5
+margin_top = -43.0
+margin_right = 51.5
+margin_bottom = 43.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Btn_resume" type="Button" parent="ColorRect/VBoxContainer"]
+margin_right = 103.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Resume"
+
+[node name="Btn_restart" type="Button" parent="ColorRect/VBoxContainer"]
+margin_top = 30.0
+margin_right = 103.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Restart"
+icon = ExtResource( 1 )
+align = 0
+expand_icon = true
+
+[node name="Btn_ExitToTitle" type="Button" parent="ColorRect/VBoxContainer"]
+margin_top = 60.0
+margin_right = 103.0
+margin_bottom = 86.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Exit to title"

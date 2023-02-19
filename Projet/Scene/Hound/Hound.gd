@@ -31,7 +31,8 @@ func _ready():
 	__ = connect("can_attack", self, "_on_can_attack")
 	__ = $Areas/AttackHitBox.connect("body_entered", self,"_on_body_entered_in_attack_hitbox")
 
-	target = get_node("/root/Debug/Player")
+
+
 	add_child(timer_cooldown_attack)
 	timer_cooldown_attack.one_shot = true
 	timer_cooldown_attack.connect("timeout", self,"_on_timer_cooldown_attack")
@@ -121,7 +122,8 @@ func _on_AnimatedSprite_animation_finished():
 		"Attack" : 
 			state_machine.set_state("Idle")
 			
-		"Die" : queue_free()
+		"Die" :
+			queue_free()
 
 func _on_can_attack():
 	state_machine.set_state("Attack")

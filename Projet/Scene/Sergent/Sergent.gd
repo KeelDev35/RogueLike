@@ -18,6 +18,8 @@ onready var bullet_point = $InstancePoints/BulletPoint
 var bullet = preload("res://Scene/Bullet/bullet.tscn")
 var bullet_speed = 800
 
+var target_offset : Vector2
+
 var dir_move = Vector2.ZERO
 
 
@@ -27,8 +29,9 @@ func _ready():
 	var __ = $AnimatedSprite.connect("animation_finished",self, "_on_AnimatedSprite_animation_finished")
 	__ = connect("target_in_attack_area", self, "_on_target_in_attack_area")
 	__ = animated_sprite.connect("frame_changed", self, "_on_AnimatedSprite_frame_changed")
+
 		
-	target = get_node("/root/Debug/Player")
+
 
 ### LOGICS ###
 func _update_sound ():
@@ -71,6 +74,11 @@ func _move_update_state(sp : float):
 		dir_move = move_and_slide(dir)
 		look_at(target.position)
 
+func _draw_exit_state():
+	randomize()
+	self.rotate(rand_range(-0.2,0.1))
+	
+	
 func _draw_update_state():
 #	look_at(target_hit.global_position)
 	look_at(target.global_position)
@@ -108,7 +116,8 @@ func _on_AnimatedSprite_animation_finished():
 			else : state_machine.set_state("Move")
 
 			
-		"Die" : queue_free()
+		"Die" :
+			queue_free()
 
 func _on_target_in_attack_area():
 	pass

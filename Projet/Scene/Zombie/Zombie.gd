@@ -29,12 +29,11 @@ func _ready():
 	var __ = $AnimatedSprite.connect("animation_finished",self, "_on_AnimatedSprite_animation_finished")
 	__ = cooldown_grab.connect("timeout", self, "_on_timeout_cooldown_grab")
 	__ = connect("target_in_attack_area", self, "_on_target_in_attack_area")
-	target = get_node("/root/Debug/Player")
+
+	
 
 
 ### LOGICS ###		
-
-
 
 func _update_sound ():
 	match (state_machine.get_state_name()):
@@ -88,7 +87,12 @@ func _hurt_update_state():
 	HP_bar.set_value(current_HP)
 
 func _grab_update_state():
-	_move_update_state(speed_grab)
+	if current_HP > 0 :
+		_move_update_state(speed_grab)
+	elif current_HP <= 0:
+		state_machine.set_state("Die")
+	
+	
 	
 func _die_enter_state():
 	$Areas/AttackArea/CollisionShape2D.disabled = true
@@ -106,7 +110,11 @@ func _on_AnimatedSprite_animation_finished():
 	match(state_machine.get_state_name()):
 		"Spawn" : state_machine.set_state("Move")
 		
-		"Move" : if target_in_attack_area : _update_target()
+		"Move" : 
+			if current_HP <= 0 : state_machine.set_state("Die")
+			else : _update_target()
+
+		
 		
 		"Hurt" : _checking_life()
 		
@@ -125,7 +133,8 @@ func _on_AnimatedSprite_animation_finished():
 				
 				state_machine.set_state("Move")
 			
-		"Die" : queue_free()
+		"Die" : 
+			queue_free()
 
 func _on_timeout_cooldown_grab():
 	canGrab = true

@@ -49,7 +49,7 @@ func _ready():
 	var __ = attack_area.connect("body_entered", self,"_on_AttackArea_body_entered")
 	__ = attack_area.connect("body_exited", self, "_on_AttackArea_body_exited")
 	__ = state_machine.connect("state_changed", self, "_on_state_changed")
-	
+	__ = $Areas/ChaseArea.connect("body_entered", self, "_on_body_entered_in_chase_area")
 	state_machine.set_state("Spawn")
 
 
@@ -78,13 +78,15 @@ func _hurt_feedback():
 	tween.start()
 	
 func _update_target():
-	if target_in_attack_area:
-		emit_signal("target_in_attack_area")
+	if current_HP > 0 :
+		if target_in_attack_area:
+			emit_signal("target_in_attack_area")
+#		else : state_machine.set_state("Move")
+	else: state_machine.set_state("Die")
 
 func _checking_life():
-	yield(get_tree().create_timer(0.1), "timeout")
 	if current_HP <= 0 : state_machine.set_state("Die")
-	elif current_HP >= 1 : state_machine.set_state("Move")	
+	else : state_machine.set_state("Move")	
 	
 ### LOGICS STATES ###
 
@@ -111,4 +113,6 @@ func _on_AttackArea_body_exited(body : Node2D):
 		set_target_in_attack_area(false)
 	pass
 
-
+func _on_body_entered_in_chase_area(_body):
+	if _body is Player:
+		target = _body

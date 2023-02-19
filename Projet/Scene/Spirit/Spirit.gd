@@ -6,13 +6,17 @@ var dir_move = Vector2.ZERO
 var timer_time_life = Timer.new()
 var time_life = 5
 
+
+
 onready var hound = preload("res://Scene/Hound/Hound.tscn")
 
 func _ready():
 	var __ = $AnimatedSprite.connect("animation_finished",self, "_on_AnimatedSprite_animation_finished")
 	__ = connect("target_in_attack_area", self, "_on_target_in_attack_area")
 	__ = animated_sprite.connect("frame_changed", self, "_on_AnimatedSprite_frame_changed")
-	target = get_node("/root/Debug/Player")
+
+	
+
 	add_child(timer_time_life)
 	timer_time_life.one_shot = true
 	timer_time_life.connect("timeout", self, "_on_timer_timeout")
@@ -74,7 +78,8 @@ func _on_AnimatedSprite_animation_finished():
 		"Attack" : 
 			state_machine.set_state("Die")
 			
-		"Die" : queue_free()
+		"Die" : 
+			queue_free()
 
 func _on_timer_timeout():
 		state_machine.set_state("Die") 

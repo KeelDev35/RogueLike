@@ -37,9 +37,12 @@ animation = "Impact"
 
 [node name="Wall_impact" type="AudioStreamPlayer2D" parent="Soundbox"]
 stream = ExtResource( 3 )
+max_distance = 300.0
 
 [node name="Character_impact" type="AudioStreamPlayer2D" parent="Soundbox"]
 stream = ExtResource( 4 )
+volume_db = 3.0
+max_distance = 300.0
 
 [connection signal="finished" from="Soundbox/Wall_impact" to="." method="_on_Wall_impact_finished"]
 [connection signal="finished" from="Soundbox/Character_impact" to="." method="_on_Character_impact_finished"]

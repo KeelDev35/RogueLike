@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
-"class": "Astar_Spawn",
-"language": "GDScript",
-"path": "res://Manager/Spawn/Logics/tile_spawn.gd"
-}, {
 "base": "State",
 "class": "AttackState",
 "language": "GDScript",
@@ -69,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://States/SpawnState.gd"
 }, {
+"base": "Node2D",
+"class": "Spawner",
+"language": "GDScript",
+"path": "res://Manager/Spawn/Logics/Spawner.gd"
+}, {
 "base": "H_Character",
 "class": "Spirit",
 "language": "GDScript",
@@ -95,7 +95,6 @@ _global_script_classes=[ {
 "path": "res://Scene/Zombie/Zombie.gd"
 } ]
 _global_script_class_icons={
-"Astar_Spawn": "",
 "AttackState": "",
 "DieState": "",
 "DrawState": "",
@@ -107,6 +106,7 @@ _global_script_class_icons={
 "Player": "",
 "Sergent": "",
 "SpawnState": "",
+"Spawner": "",
 "Spirit": "",
 "State": "",
 "StateMachine": "",
@@ -117,8 +117,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Projet"
-run/main_scene="res://Scene/Levels/level.tscn"
+run/main_scene="res://Scene/Levels/TitleScreen.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Scene/Levels/Global.tscn"
+PlayerCarac="*res://Player_carac.gd"
 
 [display]
 
